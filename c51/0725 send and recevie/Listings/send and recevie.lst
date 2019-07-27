@@ -1,0 +1,128 @@
+C51 COMPILER V9.56.0.0   SEND_AND_RECEVIE                                                  07/26/2019 09:25:38 PAGE 1   
+
+
+C51 COMPILER V9.56.0.0, COMPILATION OF MODULE SEND_AND_RECEVIE
+OBJECT MODULE PLACED IN .\Objects\send and recevie.obj
+COMPILER INVOKED BY: D:\software\Keil_v5\C51\BIN\C51.EXE send and recevie.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND 
+                    -PRINT(.\Listings\send and recevie.lst) TABS(2) OBJECT(.\Objects\send and recevie.obj)
+
+line level    source
+
+   1          #include <reg52.h>
+   2          sfr AUXR = 0xfe;
+   3          sfr BRT = 0xff;
+   4          unsigned long preMs=0;
+   5          unsigned long MS=0;
+   6          unsigned char receiveArr[4];
+   7          unsigned int receiveData=0;
+   8          unsigned int send_value=0;
+   9          char receive_i=0; 
+  10          unsigned char flag,i;
+  11          char a;
+  12          bit  Flag_receive=0;
+  13          bit  Flag_send=0;
+  14          unsigned char sendArr[2]={0};
+  15          void UartInit();
+  16          void Timer0Init();
+  17            
+  18            
+  19          void main()
+  20          {
+  21   1          Timer0Init();
+  22   1          UartInit();
+  23   1          EA=1;
+  24   1          ES=1;
+  25   1        while(1)
+  26   1        {
+  27   2          if(Flag_receive)
+  28   2          {
+  29   3              //ES=0;
+  30   3              //Flag_receive=0;
+  31   3              //preMs=MS;
+  32   3                receiveArr[receive_i++]=SBUF;
+  33   3              
+  34   3              //if((MS-preMs>=10)&&(!Flag_receive))
+  35   3              //{
+  36   3            
+  37   3      
+  38   3                  receiveData=(int)receiveArr[1]*256+receiveArr[0];
+  39   3                  send_value=receiveData+1;
+  40   3                //  sendArr[1]=send_value/256;
+  41   3                //  Flag_receive=1;
+  42   3                  receiveData=send_value;
+  43   3                  Flag_send=1;
+  44   3                  SBUF=receiveData/256;
+  45   3                  Flag_receive=0;
+  46   3                //  while(!TI);    
+  47   3                //  TI=0; 
+  48   3                  //ES=1;
+  49   3              //}         
+  50   3          }
+  51   2        }
+  52   1      }
+  53          
+  54          
+C51 COMPILER V9.56.0.0   SEND_AND_RECEVIE                                                  07/26/2019 09:25:38 PAGE 2   
+
+  55          void Timer0Init(void)   
+  56          {
+  57   1        AUXR |= 0x80;   
+  58   1        TMOD &= 0xF0;   
+  59   1        TL0 = 0x91;   
+  60   1        TH0 = 0xFF;   
+  61   1        TF0 = 0;    
+  62   1        TR0 = 1;    
+  63   1      }
+  64          void t0_1ms() interrupt 3
+  65          {
+  66   1          TL0 = 0x91;   
+  67   1          TH0 = 0xFF;   
+  68   1      }
+  69          
+  70          void UartInit(void)   
+  71          {
+  72   1        PCON &= 0x7F;   
+  73   1        SCON = 0x50;    
+  74   1        AUXR |= 0x04;   
+  75   1        BRT = 0xDC;   
+  76   1        AUXR |= 0x01;   
+  77   1        AUXR |= 0x10;   
+  78   1      }
+  79          
+  80          void serial() interrupt 4 using 0
+  81          {
+  82   1          if(RI)
+  83   1          {
+  84   2            RI=0;
+  85   2            receiveData=SBUF;//????
+  86   2            if(receiveArr[receive_i]==0x0A)//????????
+  87   2            {
+  88   3              receive_i=0;//????????????
+  89   3              Flag_receive=1;//????????
+  90   3            }
+  91   2            if(TI)
+  92   2            {
+  93   3              TI=0;
+  94   3              if(Flag_send)
+  95   3              {
+  96   4                SBUF=receiveData%256;
+  97   4                Flag_send=0;
+  98   4              }
+  99   3            }
+ 100   2      }
+ 101   1      }
+ 102          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    157    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     22    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      2    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,227 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        07/26/2019  09:25:39  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+D:\SOFTWARE\KEIL_V5\C51\BIN\BL51.EXE .\Objects\STARTUP.obj, .\Objects\send and recevie.obj TO .\Objects\send and recevie
+>>  PRINT (.\Listings\send and recevie.m51) RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\STARTUP.obj (?C_STARTUP)
+  .\Objects\send and recevie.obj (SEND_AND_RECEVIE)
+  D:\SOFTWARE\KEIL_V5\C51\LIB\C51S.LIB (?C_INIT)
+
+
+LINK MAP OF MODULE:  .\Objects\send and recevie (?C_STARTUP)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0016H     UNIT         ?DT?SEND_AND_RECEVIE
+                    001EH     0002H                  *** GAP ***
+            BIT     0020H.0   0000H.2   UNIT         ?BI?SEND_AND_RECEVIE
+                    0020H.2   0000H.6                *** GAP ***
+            IDATA   0021H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0013H     UNIT         ?PR?UARTINIT?SEND_AND_RECEVIE
+                    0016H     0005H                  *** GAP ***
+            CODE    001BH     0003H     ABSOLUTE     
+                    001EH     0005H                  *** GAP ***
+            CODE    0023H     0003H     ABSOLUTE     
+            CODE    0026H     008CH     UNIT         ?C_C51STARTUP
+            CODE    00B2H     003FH     UNIT         ?PR?MAIN?SEND_AND_RECEVIE
+            CODE    00F1H     0033H     UNIT         ?PR?SERIAL?SEND_AND_RECEVIE
+            CODE    0124H     0020H     UNIT         ?C_INITSEG
+            CODE    0144H     0011H     UNIT         ?PR?TIMER0INIT?SEND_AND_RECEVIE
+            CODE    0155H     0007H     UNIT         ?PR?T0_1MS?SEND_AND_RECEVIE
+
+
+
+OVERLAY MAP OF MODULE:   .\Objects\send and recevie (?C_STARTUP)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?SEND_AND_RECEVIE
+  +--> ?C_INITSEG
+
+?PR?MAIN?SEND_AND_RECEVIE
+  +--> ?PR?TIMER0INIT?SEND_AND_RECEVIE
+  +--> ?PR?UARTINIT?SEND_AND_RECEVIE
+
+BL51 BANKED LINKER/LOCATER V6.22                                                      07/26/2019  09:25:39  PAGE 2
+
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\send and recevie (?C_STARTUP)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        ?C_STARTUP
+  C:0026H         SEGMENT       ?C_C51STARTUP
+  I:0021H         SEGMENT       ?STACK
+  C:0000H         PUBLIC        ?C_STARTUP
+  D:00E0H         SYMBOL        ACC
+  D:00F0H         SYMBOL        B
+  D:0083H         SYMBOL        DPH
+  D:0082H         SYMBOL        DPL
+  N:0000H         SYMBOL        IBPSTACK
+  N:0100H         SYMBOL        IBPSTACKTOP
+  N:0080H         SYMBOL        IDATALEN
+  C:0029H         SYMBOL        IDATALOOP
+  N:0000H         SYMBOL        PBPSTACK
+  N:0100H         SYMBOL        PBPSTACKTOP
+  N:0000H         SYMBOL        PDATALEN
+  N:0000H         SYMBOL        PDATASTART
+  N:0000H         SYMBOL        PPAGE
+  N:0000H         SYMBOL        PPAGEENABLE
+  D:00A0H         SYMBOL        PPAGE_SFR
+  D:0081H         SYMBOL        SP
+  C:0026H         SYMBOL        STARTUP1
+  N:0000H         SYMBOL        XBPSTACK
+  N:0000H         SYMBOL        XBPSTACKTOP
+  N:0000H         SYMBOL        XDATALEN
+  N:0000H         SYMBOL        XDATASTART
+  C:0000H         LINE#         126
+  C:0026H         LINE#         133
+  C:0028H         LINE#         134
+  C:0029H         LINE#         135
+  C:002AH         LINE#         136
+  C:002CH         LINE#         185
+  C:002FH         LINE#         196
+  -------         ENDMOD        ?C_STARTUP
+
+  -------         MODULE        SEND_AND_RECEVIE
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00B0H         PUBLIC        P3
+  C:00F1H         PUBLIC        serial
+  B:00A8H.7       PUBLIC        EA
+  B:0020H.0       PUBLIC        Flag_send
+  D:0008H         PUBLIC        preMs
+  D:00A8H         PUBLIC        IE
+  D:000CH         PUBLIC        receiveArr
+  C:0155H         PUBLIC        t0_1ms
+  B:00A8H.4       PUBLIC        ES
+  D:00B8H         PUBLIC        IP
+  B:0098H.0       PUBLIC        RI
+  D:0010H         PUBLIC        flag
+  B:0098H.1       PUBLIC        TI
+BL51 BANKED LINKER/LOCATER V6.22                                                      07/26/2019  09:25:39  PAGE 3
+
+
+  D:0011H         PUBLIC        MS
+  C:00B2H         PUBLIC        main
+  D:0015H         PUBLIC        send_value
+  D:0017H         PUBLIC        receive_i
+  D:0099H         PUBLIC        SBUF
+  D:0087H         PUBLIC        PCON
+  D:0098H         PUBLIC        SCON
+  C:0003H         PUBLIC        UartInit
+  D:0089H         PUBLIC        TMOD
+  D:0088H         PUBLIC        TCON
+  D:00FEH         PUBLIC        AUXR
+  B:0020H.1       PUBLIC        Flag_receive
+  B:0088H.5       PUBLIC        TF0
+  C:0144H         PUBLIC        Timer0Init
+  D:008CH         PUBLIC        TH0
+  D:008AH         PUBLIC        TL0
+  D:0018H         PUBLIC        sendArr
+  B:0088H.4       PUBLIC        TR0
+  D:001AH         PUBLIC        a
+  D:001BH         PUBLIC        receiveData
+  D:00C8H         PUBLIC        T2CON
+  D:001DH         PUBLIC        i
+  D:00FFH         PUBLIC        BRT
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          MAIN
+  C:00B2H         LINE#         19
+  C:00B2H         LINE#         20
+  C:00B2H         LINE#         21
+  C:00B5H         LINE#         22
+  C:00B8H         LINE#         23
+  C:00BAH         LINE#         24
+  C:00BCH         LINE#         25
+  C:00BCH         LINE#         26
+  C:00BCH         LINE#         27
+  C:00BFH         LINE#         28
+  C:00BFH         LINE#         32
+  C:00C9H         LINE#         38
+  C:00D7H         LINE#         39
+  C:00E2H         LINE#         42
+  C:00E7H         LINE#         43
+  C:00E9H         LINE#         44
+  C:00EDH         LINE#         45
+  C:00EFH         LINE#         50
+  C:00EFH         LINE#         51
+  -------         ENDPROC       MAIN
+  -------         PROC          TIMER0INIT
+  C:0144H         LINE#         55
+  C:0144H         LINE#         56
+  C:0144H         LINE#         57
+  C:0147H         LINE#         58
+  C:014AH         LINE#         59
+  C:014DH         LINE#         60
+  C:0150H         LINE#         61
+  C:0152H         LINE#         62
+  C:0154H         LINE#         63
+  -------         ENDPROC       TIMER0INIT
+  -------         PROC          T0_1MS
+BL51 BANKED LINKER/LOCATER V6.22                                                      07/26/2019  09:25:39  PAGE 4
+
+
+  C:0155H         LINE#         64
+  C:0155H         LINE#         66
+  C:0158H         LINE#         67
+  C:015BH         LINE#         68
+  -------         ENDPROC       T0_1MS
+  -------         PROC          UARTINIT
+  C:0003H         LINE#         70
+  C:0003H         LINE#         71
+  C:0003H         LINE#         72
+  C:0006H         LINE#         73
+  C:0009H         LINE#         74
+  C:000CH         LINE#         75
+  C:000FH         LINE#         76
+  C:0012H         LINE#         77
+  C:0015H         LINE#         78
+  -------         ENDPROC       UARTINIT
+  -------         PROC          SERIAL
+  C:00F1H         LINE#         80
+  C:00F8H         LINE#         82
+  C:00FBH         LINE#         83
+  C:00FBH         LINE#         84
+  C:00FDH         LINE#         85
+  C:0104H         LINE#         86
+  C:010DH         LINE#         87
+  C:010DH         LINE#         88
+  C:0110H         LINE#         89
+  C:0112H         LINE#         90
+  C:0112H         LINE#         91
+  C:0115H         LINE#         92
+  C:0115H         LINE#         93
+  C:0117H         LINE#         94
+  C:011AH         LINE#         95
+  C:011AH         LINE#         96
+  C:011DH         LINE#         97
+  C:011FH         LINE#         98
+  C:011FH         LINE#         99
+  C:011FH         LINE#         100
+  C:011FH         LINE#         101
+  -------         ENDPROC       SERIAL
+  -------         ENDMOD        SEND_AND_RECEVIE
+
+Program Size: data=31.2 xdata=0 code=338
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

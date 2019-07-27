@@ -1,0 +1,4 @@
+".\Objects\STARTUP.obj",
+".\Objects\send and recevie.obj" 
+TO ".\Objects\send and recevie" 
+PRINT(".\Listings\send and recevie.m51") RAMSIZE(256) 

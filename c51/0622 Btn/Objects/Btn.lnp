@@ -1,0 +1,4 @@
+".\Objects\STARTUP.obj",
+".\Objects\mian.obj" 
+TO ".\Objects\Btn" 
+PRINT(".\Listings\Btn.m51") RAMSIZE(256) 
